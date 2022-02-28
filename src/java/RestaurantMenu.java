@@ -48,7 +48,7 @@ public class RestaurantMenu extends HttpServlet {
             HttpServletResponse response)
                 throws ServletException, IOException
     {
-        String firstName = request.getParameter( "firstName" );
+            //String firstName = request.getParameter( "firstName" );
             response.setContentType( "text/html" );
             PrintWriter out = response.getWriter();
             //DecimalFormat twoDigits = new DecimalFormat("0.00");
