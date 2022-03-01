@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class RestaurantMenu extends HttpServlet {
     
-    private PreparedStatement updateVotes, totalVotes, results;
+    private PreparedStatement Description, Product ,Price;
     private Connection connection;
     
     public void init( ServletConfig config ) throws ServletException
@@ -35,9 +35,11 @@ public class RestaurantMenu extends HttpServlet {
             
             connection = DriverManager.getConnection("jdbc:postgresql:postgres", properties);
             
-            updateVotes = connection.prepareStatement("UPDATE surveyresults SET votes = votes + 1" + "WHERE id = ?");
-            totalVotes = connection.prepareStatement("SELECT sum(votes) FROM surveyresults");
-            results = connection.prepareStatement("SELECT surveyoption, votes, id " + "FROM surveyresults ORDER by id");
+            //updateVotes = connection.prepareStatement("UPDATE surveyresults SET votes = votes + 1" + "WHERE id = ?");
+            //Description = connection.prepareStatement("SELECT description, price, product, id \" + \"FROM menu ORDER by id");
+            Description = connection.prepareStatement("select * from menu");
+            //totalVotes = connection.prepareStatement("SELECT sum(votes) FROM surveyresults");
+            //results = connection.prepareStatement("SELECT surveyoption, votes, id " + "FROM surveyresults ORDER by id");
                     
         }catch(Exception e){
             System.out.println("Exception occured "+e);
@@ -48,7 +50,7 @@ public class RestaurantMenu extends HttpServlet {
             HttpServletResponse response)
                 throws ServletException, IOException
     {
-            //String firstName = request.getParameter( "firstName" );
+            String firstName = request.getParameter( "firstName" );
             response.setContentType( "text/html" );
             PrintWriter out = response.getWriter();
             //DecimalFormat twoDigits = new DecimalFormat("0.00");
@@ -66,30 +68,36 @@ public class RestaurantMenu extends HttpServlet {
             out.println("<head>");
             
             
-            int value = Integer.parseInt( request.getParameter("animal"));
+            //int value = Integer.parseInt( request.getParameter("animal"));
             
             try {
                 
-                updateVotes.setInt(1, value);
-                updateVotes.executeUpdate();
+                //updateVotes.setInt(1, value);
+                //updateVotes.executeUpdate();
                 
-                ResultSet totalRS = totalVotes.executeQuery();
-                totalRS.next();
-                int total = totalRS.getInt(1);
+                //ResultSet totalRS = totalVotes.executeQuery();
+                //totalRS.next();
+                //int total = totalRS.getInt(1);
                 
-                ResultSet resultsRS = results.executeQuery();
+                //ResultSet resultsRS = results.executeQuery();
+                
+                ResultSet desc = Description.executeQuery();
+                //int idnum = desc.getInt(0);
+                
                 out.println("<title>Thank you!</title>");
                 out.println("</head>");
                 
                 out.println("<body>");
-                out.println("<p>Thank you for participating.");
-                
-                resultsRS.close();
-                
+                out.println("<p>Thank you for participating. " + firstName);
+
                 out.print("Total responses:" );
-                out.print(total);
+                
+                while(desc.next()){
+                    out.print("Entry: " + desc.getString("product"));
+                }
                 
                 out.println("</pre><body></html>");
+                //desc.close();
                 out.close();
             }
             
@@ -105,9 +113,9 @@ public class RestaurantMenu extends HttpServlet {
     public void destroy()
             {
                 try{
-                    updateVotes.close();
-                    totalVotes.close();
-                    results.close();
+                    Description.close();
+                    Product.close();
+                    Price.close();
                     connection.close();
                 }
                 catch(SQLException s){

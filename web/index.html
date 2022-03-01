@@ -11,10 +11,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <!-- Greeting for the end user -->
-        Do you want to see our Menu?
         <!-- The user wants to see the menu and they are redirected accordingly... -->
         <form action = "/RestaurantProject1-Servlet-Menu/Menu" method = "post">
+                <!-- Greeting for the end user -->
+                    Do you want to see our Menu? If so... <br>
+                    Type your first name and press the Yes button
+                    <br /><input type = "text" name = "firstName" />
            <p><label><input type = "submit" value = "Yes" /></label></p>
         </form>
         <!-- The user does not want to see the menu and the window is closed... -->
