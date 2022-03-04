@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class RestaurantMenu extends HttpServlet {
     
-    private PreparedStatement Description, Product ,Price;
+    private PreparedStatement Puller, Product ,Price;
     private Connection connection;
     
     public void init( ServletConfig config ) throws ServletException
@@ -37,7 +37,7 @@ public class RestaurantMenu extends HttpServlet {
             
             //updateVotes = connection.prepareStatement("UPDATE surveyresults SET votes = votes + 1" + "WHERE id = ?");
             //Description = connection.prepareStatement("SELECT description, price, product, id \" + \"FROM menu ORDER by id");
-            Description = connection.prepareStatement("select * from menu");
+            Puller = connection.prepareStatement("select * from menu order by id");
             //totalVotes = connection.prepareStatement("SELECT sum(votes) FROM surveyresults");
             //results = connection.prepareStatement("SELECT surveyoption, votes, id " + "FROM surveyresults ORDER by id");
                     
@@ -50,7 +50,6 @@ public class RestaurantMenu extends HttpServlet {
             HttpServletResponse response)
                 throws ServletException, IOException
     {
-            String firstName = request.getParameter( "firstName" );
             response.setContentType( "text/html" );
             PrintWriter out = response.getWriter();
             //DecimalFormat twoDigits = new DecimalFormat("0.00");
@@ -81,21 +80,55 @@ public class RestaurantMenu extends HttpServlet {
                 
                 //ResultSet resultsRS = results.executeQuery();
                 
-                ResultSet desc = Description.executeQuery();
+                ResultSet queue = Puller.executeQuery();
                 //int idnum = desc.getInt(0);
                 
                 out.println("<title>Thank you!</title>");
+                
+                out.println("<style type=\"text/css\">div.a { \n" + "position: absolute;\n" + "left: 150px;\n" + "top: 150px; \n" + "}" + "</style>");
+                out.println("<style type=\"text/css\">div.b { \n" + "position: absolute;\n" + "left: 200px;\n" + "top: 150px; \n" + "}" + "</style>");
+                
                 out.println("</head>");
                 
                 out.println("<body>");
-                out.println("<p>Thank you for participating. " + firstName);
 
-                out.print("Total responses:" );
+                out.print("<br>" );
                 
-                while(desc.next()){
-                    out.print("Entry: " + desc.getString("product"));
-                }
+                StringBuilder idbuilder = new StringBuilder();
+                StringBuilder pricebuilder = new StringBuilder();
                 
+                    
+                        while(queue.next()){
+                            int id = queue.getInt("id");
+                            float pr = queue.getFloat("price");
+                            //String descriptionpull = queue.getString("description");
+                            //String productpull = queue.getString("product");
+                            //String pricepull = queue.getString("price");
+                            ///String fixeddes = "%15s %n" + des; 
+                            // System.out.printf( "%-15s %15s %n", heading1, heading2);
+                            //String pro = desc.getString("Product");
+                            //String pri = desc.getString("Price");
+                            // out.print(id + " " + des + " " + pro + " " + pri);
+                            // out.println(fixeddes); 
+                            //String des = desc.getString("Description");
+                            //out.print(des + "<br>");
+                        //    build.append(id);
+                            //build.append(descriptionpull);
+                            //build.append(productpull);
+                            //build.append(pricepull);
+                        //    out.print(build.toString() + "<br>");
+                            //out.print(descriptionpull + "<br>");
+                            //out.print(productpull + "<br>");
+                            //for(int i = 0; i < 28; i++){
+                            //    out.print(i + "<br>" + descriptionpull);
+                            //}
+                            idbuilder.append(id + "<br>");
+                            pricebuilder.append(pr + "<br>");
+                        }
+                
+                //out.println("ID: " + idbuilder.toString());
+                out.println("<div class=\"a\">ID: <br>" + idbuilder.toString() + "</div>");
+                out.println("<div class=\"b\">Price: <br>" + pricebuilder.toString() + "</div>");
                 out.println("</pre><body></html>");
                 //desc.close();
                 out.close();
@@ -113,10 +146,10 @@ public class RestaurantMenu extends HttpServlet {
     public void destroy()
             {
                 try{
-                    Description.close();
-                    Product.close();
-                    Price.close();
-                    connection.close();
+                    Puller.close();
+                    //Product.close();
+                    //Price.close();
+                    //connection.close();
                 }
                 catch(SQLException s){
                     s.printStackTrace();
