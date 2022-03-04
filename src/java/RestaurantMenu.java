@@ -52,8 +52,10 @@ public class RestaurantMenu extends HttpServlet {
     {
             response.setContentType( "text/html" );
             PrintWriter out = response.getWriter();
-            //DecimalFormat twoDigits = new DecimalFormat("0.00");
-            //twoDigits.setMaximumFractionDigits(2);
+            
+            DecimalFormat twoDigits = new DecimalFormat("0.00");
+            twoDigits.setMaximumFractionDigits(2);
+            
             //System.out.println(twoDigits.format(decimalNumber));
             
             out.println( "<?xml version = \"1.0\"?>");
@@ -96,8 +98,7 @@ public class RestaurantMenu extends HttpServlet {
                 
                 StringBuilder idbuilder = new StringBuilder();
                 StringBuilder pricebuilder = new StringBuilder();
-                
-                    
+
                         while(queue.next()){
                             int id = queue.getInt("id");
                             float pr = queue.getFloat("price");
@@ -123,7 +124,8 @@ public class RestaurantMenu extends HttpServlet {
                             //    out.print(i + "<br>" + descriptionpull);
                             //}
                             idbuilder.append(id + "<br>");
-                            pricebuilder.append(pr + "<br>");
+                            pricebuilder.append(twoDigits.format(pr) + "<br>");
+                            //pricebuilder.append(pr + "<br>");
                         }
                 
                 //out.println("ID: " + idbuilder.toString());
