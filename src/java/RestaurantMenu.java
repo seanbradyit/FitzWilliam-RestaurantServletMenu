@@ -33,12 +33,10 @@ public class RestaurantMenu extends HttpServlet {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            //Class.forName("org.postgresql.Driver");
             
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/menu_schema?", properties);
-            //connection = DriverManager.getConnection("jdbc:postgresql:postgres", properties);
-            Puller = connection.prepareStatement("select * from menu order by id");
-                    
+            Puller = connection.prepareStatement("select * from menu order by id;");
+            
         }catch(Exception e){
             System.out.println("Exception occured "+e);
         }
@@ -60,7 +58,7 @@ public class RestaurantMenu extends HttpServlet {
                     "/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
             out.println("<html xmlns = \"http://www.w3.org/1999/xhtml\">");
             out.println("<head>"); 
-            
+             
             try {
                 ResultSet queue = Puller.executeQuery();
                 
