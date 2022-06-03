@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+Sean Brady 2022 - Project 1 - April 1st - First attempt for review...
+-->
+<html>
+    <head>
+        <title>Mario's Munch Restaurant - Booking and Reservations</title>
+        <!-- Call to action created for user... -->
+        <meta charset="UTF-8"> <!-- text formatting used -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- display context utilised -->
+        <link href='https://fonts.googleapis.com/css?family=Gruppo' rel='stylesheet'>
+        <style>
+            h2 {position: absolute; left: 200px; top: 150px; background-color: #002360; color: white; font-family:'Gruppo'; font-size:22px; width: 320px;}
+            form {position: absolute; left: 200px; top: 220px; font-family:'Gruppo'; font-size:22px; width: 320px;}
+            div {position: absolute; left: 200px; top: 270px; font-family:'Gruppo'; font-size:22px;}
+        </style>
+    </head>
+    <body>
+        
+        <h2>Mario's Munch Restaurant - Menu</h2>
+        <!-- The user wants to see the menu and they are redirected accordingly... -->
+        <form action = "/RestaurantProject1-Servlet-Menu/Menu" method = "post">
+                <!-- Greeting for the employee -->
+                    Does the customer want to hear our Menu options?
+           <label><input type = "submit" value = "Yes" /></label>
+        </form>
+        <!-- The user does not want to see the menu and the window is closed... -->
+        <div><button type="button" onclick="window.close()">No</button> Exit the application</div>
+    </body>
+</html>
