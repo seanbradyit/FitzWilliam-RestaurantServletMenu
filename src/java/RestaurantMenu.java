@@ -111,10 +111,10 @@ public class RestaurantMenu extends HttpServlet { // class created which uses th
                 out.println("<div class=\"c\">Product: <br>" + productbuilder.toString() + "</div>"); // show list of individal items offered
                 out.println("<div class=\"d\">Price: <br>" + pricebuilder.toString() + "</div>"); // show list of item prices
                 
-                out.println("<br>Does the customer want to make a reservation?");
-                out.println("<form action = \"/Reservation.jsp\" method = \"post\">");
-                out.println("<label><input type = \"submit\" value = \"Yes\" /></label>");
-                out.println("</form>");
+                out.println("<br>Does the customer want to make a reservation?");           // User prompt to enter reservation system
+                out.println("<form action = \"/Reservation.jsp\" method = \"post\">");      // Redirect to jsp file/page housing reservation system
+                out.println("<label><input type = \"submit\" value = \"Yes\" /></label>");  // Button to initialise the transfer...
+                out.println("</form>");                                                     // End of prompt
                 out.println("</pre><body></html>"); // end HTML doc
                 out.close(); // close I/O post response writer
                 // END -- Creating required HTML bottom portion
