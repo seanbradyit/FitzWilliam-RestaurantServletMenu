@@ -13,7 +13,7 @@ import java.text.*; // class imported for data processing
 import java.sql.*; // class imported for JDBC API sync and SQL language processing
 import java.util.Properties; // class imported to accomodate stream parameters
 
-@WebServlet(name="RestaurantProject1-Servlet-Menu",urlPatterns={"/RestaurantProject1-Servlet-Menu"}) // servlet name declaration and URL path
+@WebServlet(name="restaurant",urlPatterns={"/restaurant"}) // servlet name declaration and URL path
 
 public class RestaurantMenu extends HttpServlet { // class created which uses the HttpServlet functionality
     
@@ -145,3 +145,8 @@ public class RestaurantMenu extends HttpServlet { // class created which uses th
                 }
             }
 }
+
+
+
+// Manually adjusted ports to be used in apache config
+// Manually URL mapping for overall servlet to force 'restaurant entry'

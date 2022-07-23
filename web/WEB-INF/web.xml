@@ -12,21 +12,21 @@ and open the template in the editor.
 <web-app>
     
     <display-name>
-        TesterName
+        Restaurant
     </display-name>
     
     <description>
-        TesterDescription
+        Restaurant Description
     </description>
     
     <servlet>
-        <servlet-name>RestaurantProject1-Servlet-Menu</servlet-name>
+        <servlet-name>restaurant</servlet-name>
         <description>Menu Presentation</description>
         <servlet-class>RestaurantMenu</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>RestaurantProject1-Servlet-Menu</servlet-name>
+        <servlet-name>restaurant</servlet-name>
         <url-pattern>/Menu</url-pattern>
     </servlet-mapping>
        
