@@ -20,13 +20,13 @@ and open the template in the editor.
     </description>
     
     <servlet>
-        <servlet-name>restaurant</servlet-name>
+        <servlet-name>RestaurantMenu</servlet-name>
         <description>Menu Presentation</description>
         <servlet-class>RestaurantMenu</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>restaurant</servlet-name>
+        <servlet-name>RestaurantMenu</servlet-name>
         <url-pattern>/Menu</url-pattern>
     </servlet-mapping>
        
