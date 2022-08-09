@@ -70,6 +70,11 @@ public class RestaurantMenu extends HttpServlet { // class created which uses th
             try {
                 ResultSet queue = Puller.executeQuery(); // create queue object to pull and show the results from SQL statement
                 
+                String sessionPostUser = "transient";
+                Cookie session = new Cookie("session", sessionPostUser);
+                session.setMaxAge(1800);
+                response.addCookie(session);
+                
                 // START -- Creating required HTML mid portion
                 out.println("<title>Today's Menu</title>");
                 
@@ -163,6 +168,11 @@ public class RestaurantMenu extends HttpServlet { // class created which uses th
              
             try {
                 ResultSet queue = Puller.executeQuery(); // create queue object to pull and show the results from SQL statement
+                
+                String sessionGetUser = "transient";
+                Cookie session = new Cookie("session", sessionGetUser);
+                session.setMaxAge(1800);
+                response.addCookie(session);
                 
                 // START -- Creating required HTML mid portion
                 out.println("<title>Today's Menu</title>");
